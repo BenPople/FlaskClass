@@ -63,7 +63,7 @@ def requestTemperatureExceeded():
 
 @app.route('/api/v1/LED/SetLight', methods=['GET'])
 def setLight():
-    color = request.args.get('lightColour')
+    color = request.args.get('lightColour').split(',')
     #color = "'255','255','0'" -> color = [255,255,0]
     trueColor = []
 
