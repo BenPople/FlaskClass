@@ -64,8 +64,19 @@ def requestTemperatureExceeded():
 @app.route('/api/v1/LED/SetLight', methods=['GET'])
 def setLight():
     color = request.args.get('lightColour')
-    Sense.clear(color)
-    return jsonify({"SetLightSuccess" : True})
+    #color = "'255','255','0'" -> color = [255,255,0]
+    trueColor = []
+
+    for value in color:
+        trueColor.append(int(value))
+
+    Sense.clear(trueColor)
+    return jsonify(
+        {
+            "SetLightSuccess" : True,
+            "SetColor" : trueColor
+            }
+        )
 
 @app.route('/sensors')
 def sensors():
